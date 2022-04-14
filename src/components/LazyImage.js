@@ -4,7 +4,7 @@ import { useObserver } from '../hooks/useObserver'
 const LazyImage = ({ image, isLast }) => {
  const imageRef = useRef()
  const [imageUrl, setImageUrl] = useState('')
- const entry = useObserver(imageRef, { rootMargin:"100px" })
+ const entry = useObserver(imageRef, { rootMargin:"100px", threshold:"1" })
 
  useEffect(() => {
    if(!entry) return

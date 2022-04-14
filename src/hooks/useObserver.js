@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 export const useObserver = (ref, options) => {
-    const { rootMargin } = options
+    const { rootMargin, threshold } = options
     const [observerEntry, setObserverEntry] = useState(null)
     useEffect(() => {
         if(!ref?.current) return
@@ -12,10 +12,10 @@ export const useObserver = (ref, options) => {
                console.log("last image is in viewport")
                observer.unobserve(entry.target)
              }
-        },{ rootMargin })
+        },{ rootMargin, threshold })
 
         observer.observe(ref.current)
-      }, [ref, rootMargin])
+      }, [ref, rootMargin, threshold])
 
       return observerEntry
 }
