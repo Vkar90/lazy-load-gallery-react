@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Custom Hooks
+
+A custom hook **useObserver()** was created with the help of Intersection Observer API to monitor elements when entering Viewport
+
 ## Images API
 
 Got images from Lorem Picsum API (https://picsum.photos/)
