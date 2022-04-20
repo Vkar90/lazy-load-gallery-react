@@ -14,8 +14,9 @@ const LazyImage = ({ image, isLast, nextPage }) => {
       nextPage()
     }
     if(entry.isIntersecting){
-      setImageUrl(entry.target.dataset.src)
+      setImageUrl(entry.target.dataset.src) //give src url to image when it enters viewport
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entry, isLast])
  
   return (

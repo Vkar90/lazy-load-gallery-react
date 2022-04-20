@@ -4,7 +4,7 @@ import LazyImage from './components/LazyImage'
 
 
 function App ()  {
-  const [imageList, setImageList] = useState([])
+  const [imagesList, setImagesList] = useState([])
   const [page, setPage] = useState(1) //state to manage next pages
 
   //function to get the next page  
@@ -13,8 +13,10 @@ function App ()  {
   }
 
   useEffect(() => {
-    // fetchImages(page).then((images) => setImageList(images))  **use this if we don't want to infinite scroll through pages
-    fetchImages(page).then((images) => setImageList(prev =>  [...prev, ...images])) //use prev as previous state and add the new images to prev state instead of overwriting it
+    // fetchImages(page).then((images) => setImagesList(images))  ** use this if we don't want to infinite scroll through pages
+    fetchImages(page).then((images) =>
+            setImagesList((prev) => [...prev, ...images])
+        ); //use prev as previous state and add the new images to prev state instead of overwriting it
   }, [page])
   
   return (
@@ -23,12 +25,12 @@ function App ()  {
       <h3 style={{textAlign:"center"}}>Scroll Down 👇</h3>
       <div style={{height: "80vh"}}></div>
       <div style={{display:"grid", gridTemplateColumns:"repeat(3,200px)", justifyContent:"center", alignItems:"center", gap:"1rem" }}>
-        {imageList.map((image, index) => (
+        {imagesList.map((image, index) => (
             <LazyImage 
               key={image.id} 
               image={image} 
-              isLast={index === imageList.length - 1} 
-              nextPage={nextPage}
+              isLast={index === imagesList.length - 1} 
+              nextPage={nextPage} //use function as property for next page load
             />
         ))}
       </div>

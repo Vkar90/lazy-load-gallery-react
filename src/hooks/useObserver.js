@@ -7,9 +7,9 @@ export const useObserver = (ref, options) => {
         if(!ref?.current) return
         const observer = new IntersectionObserver(([entry]) => {
              // console.log(entry)
+             setObserverEntry(entry)
              if(entry.isIntersecting){
-               setObserverEntry(entry)
-               observer.unobserve(entry.target)
+               observer.unobserve(entry.target) //we don't want to trigger the page load again if we scroll back up
              }
         },{ rootMargin, threshold })
 
