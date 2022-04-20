@@ -5,10 +5,17 @@ import LazyImage from './components/LazyImage'
 
 function App ()  {
   const [imageList, setImageList] = useState([])
+  const [page, setPage] = useState(1) //state to manage next pages
+
+  //function to get the next page  
+  const nextPage = () => {
+    setPage(page + 1)
+  }
 
   useEffect(() => {
-    fetchImages().then((images) => setImageList(images))
-  }, [])
+    // fetchImages(page).then((images) => setImageList(images))  **use this if we don't want to infinite scroll through pages
+    fetchImages(page).then((images) => setImageList(prev =>  [...prev, ...images])) //use prev as previous state and add the new images to prev state instead of overwriting it
+  }, [page])
   
   return (
     <div>
@@ -21,6 +28,7 @@ function App ()  {
               key={image.id} 
               image={image} 
               isLast={index === imageList.length - 1} 
+              nextPage={nextPage}
             />
         ))}
       </div>

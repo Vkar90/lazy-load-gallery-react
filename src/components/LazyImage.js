@@ -1,16 +1,17 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useObserver } from '../hooks/useObserver'
 
-const LazyImage = ({ image, isLast }) => {
+const LazyImage = ({ image, isLast, nextPage }) => {
  const imageRef = useRef()
  const [imageUrl, setImageUrl] = useState('')
- const entry = useObserver(imageRef, { rootMargin:"100px", threshold:"1" })
+ const entry = useObserver(imageRef, { rootMargin:"0px", threshold:"1" })
 
  useEffect(() => {
    if(!entry) return
         // console.log(entry)
     if(isLast && entry.isIntersecting){
       console.log("last image is in viewport")  
+      nextPage()
     }
     if(entry.isIntersecting){
       setImageUrl(entry.target.dataset.src)
@@ -18,7 +19,7 @@ const LazyImage = ({ image, isLast }) => {
   }, [entry, isLast])
  
   return (
-    <div style={{minHeight: 200}}>
+    <div style={{minHeight: 100}}>
         <img 
             ref={imageRef}
             src={imageUrl}

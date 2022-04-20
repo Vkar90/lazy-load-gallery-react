@@ -9,7 +9,6 @@ export const useObserver = (ref, options) => {
              // console.log(entry)
              if(entry.isIntersecting){
                setObserverEntry(entry)
-               console.log("last image is in viewport")
                observer.unobserve(entry.target)
              }
         },{ rootMargin, threshold })
